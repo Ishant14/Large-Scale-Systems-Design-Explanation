@@ -78,7 +78,7 @@ Design a URL Shortening
   a.	Each server layers can have load balancer.
     i.	Clients and application servers
     ii.	Application servers and database servers
-    iii.	Application servers and cache servers
+    iii.Application servers and cache servers
     b.	We can use round robin but this has some problems so we can use intelligent LB approach.
 
 10.	More Visually
