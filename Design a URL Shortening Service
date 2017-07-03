@@ -13,9 +13,9 @@ Design a URL Shortening
     d.	Whenever user can enter the short URL, system should redirect user to actual URL.
     e.	Notice that this short URL should have an expire time.
     f.	Moreover some performance of system should be provided
-      i.	System should be highly reliable. This means that every actual URL should be saved and not deleted.
-      ii.	System should have a minimum latency. This means that when user enter the short URL, user should quickly redirect the actual URL with minimum latency. For this purpose we use data sharding and caching.
-      iii.	System should be highly available. This means that when user enter the short URL, he or she should reach the actual URL at the same time. For this purpose, we can use data replication. 
+      i.System should be highly reliable. This means that every actual URL should be saved and not deleted.
+      ii.System should have a minimum latency. This means that when user enter the short URL, user should quickly redirect the actual URL with minimum latency. For this purpose we use data sharding and caching.
+      iii.System should be highly available. This means that when user enter the short URL, he or she should reach the actual URL at the same time. For this purpose, we can use data replication. 
     g.	In addition user can save the short URL with custom alias. But for this property, we can restrict user with character limits.
     h.	To monitor system, we can save the access time, access region, browser or platform.
     i.	Finally, these short URL’s should not be predictable.
@@ -25,21 +25,22 @@ Design a URL Shortening
     a.	Let’s think about our system has 100 million users and each users enter the five new URL in a month. These means that every month, 500 million new URL comes. 
     b.	If we think about every actual URL size is 100 bytes (100 character represented)  then in a month, 100 bytes * 500 M = 50 GB new data comes. This means that in a 10 years later, 50 GB * 12 * 10 = 120 * 50 GB = 6000 GB = approximately 6 TB data must saved.
     c.	Notice that if the ratio of read and write operation is 10 : 1 then 500 million new URLS writes and 5 billion URLS reads. 
-      i.	Traffic estimates
-        1.	In a second = 500 million / (30*24*3600) = ~200 URL / s to write
-        2.	In a second = ~200 * 10 = 2K URL / s to read
-      ii.	Bandwith estimates
-        1.	In a second = 200 URL * 100 bytes = 20 KB / s to write
-        2.	In a second = 2 K URL * 100 bytes = 200 KB / s to read
-      iii.	Caching estimate
-        1.	Notice that if we realize that %20 rule of memory. 
-          a.	In a day = 2 K * 3600 * 24 * 0.2 = ~35 GB
+      i.Traffic estimates
+        1.In a second = 500 million / (30*24*3600) = ~200 URL / s to write
+        2.In a second = ~200 * 10 = 2K URL / s to read
+      ii.Bandwith estimates
+        1.In a second = 200 URL * 100 bytes = 20 KB / s to write
+        2.In a second = 2 K URL * 100 bytes = 200 KB / s to read
+      iii.Caching estimate
+        1.Notice that if we realize that %20 rule of memory. 
+          a.In a day = 2 K * 3600 * 24 * 0.2 = ~35 GB
           
 4.	System API’s
 
     a.	We can use REST API to connect between system and devices. There are two main APIs that are createURL and deleteURL. All of these have develop_api_key for controlling the usage and limit of using API.
-      i.	createURL(key, custom_alias=None, user_name=None, expire_date = None)  Notice that this returns string short URL
-      ii.	deleteURL(key, short_url) return http api response.
+      i.createURL  Notice that this returns string short URL
+      ii.deleteURL return http api response.
+      iii.controlExpireTime return http api response.
 
 5.	Database Design
 
@@ -49,7 +50,7 @@ Design a URL Shortening
 6.	Basic System Design
 
     a.	First we think about how can we provide actual unique short URL and how can we format actual URL. The simpliest way to encode URL ise use MD5 or SHA256 hashing with base36 or base62 or base64 hashing. So we think that 8 unique letters to use hashing and base64 is used, then approximately 280 trillion possible strings are created and this number is big enough for unique URLs. 
-      i.	Think basic:
+      i.Think basic:
         1.	Client enter the actual URL
         2.	Short URL goes to server
         3.	Server encode the URL and try to save database
@@ -69,16 +70,16 @@ Design a URL Shortening
     
 8.	Cache
 
-  a.	We can use Amazon elastiCache for caching operations.
-  b.	LRU caching mechanism uses for this purpose
-  c.	Notice that cache data is a mirror copy of actual data. Each copy data should have an expire date. 
+    a.	We can use Amazon elastiCache for caching operations.
+    b.	LRU caching mechanism uses for this purpose
+    c.	Notice that cache data is a mirror copy of actual data. Each copy data should have an expire date. 
 
 9.	Load Balancer
 
-  a.	Each server layers can have load balancer.
-    i.	Clients and application servers
-    ii.	Application servers and database servers
-    iii.Application servers and cache servers
+    a.	Each server layers can have load balancer.
+        i.	Clients and application servers
+        ii.	Application servers and database servers
+        iii.Application servers and cache servers
     b.	We can use round robin but this has some problems so we can use intelligent LB approach.
 
 10.	More Visually
