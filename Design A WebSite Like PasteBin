@@ -1,0 +1,20 @@
+1-) What this web site looks like?
+
+  i-) This web site helps users to upload and store text plain or image in cloud platforms. 
+  ii-) Users can easly reach this plain text or image with given unique URL
+  iii-) Additionally other users can easily reach plaint text or image shared by other users by accessing URL. 
+  iiii-) Additionally, users can share plain text or image with private or public options.
+  
+2-) System Requirements and Goals of the system
+
+  i-) User should upload and store plain text and image then take an unique URL.
+  ii-) Users should reach their uploaded plain text and image by entering this given unique URL.
+  iii-) Users should choose public or private properties to determine which users can see files or which users cannot see files.
+  iiii-) Other users should see the public files by accessing specific unique URL.
+  iiiii-) Notice that system should be highly reliable. This means that every files should store and when server fail, files should not be lost. (Replication)
+  iiiiii-) Notice that system should be highly available. This means that users should access the web site whenever they want. 
+  iiiiiii-) System should return the response with minimum latency. This property is provided by using loadbalancing, partitioning, sharding, caching.
+  iiiiiiii-) Additionally, system can be monitored.
+  iiiiiiiii-) Rest or SOAP API's can prefer for connecting system and outer environment.
+  
+
