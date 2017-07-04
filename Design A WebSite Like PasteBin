@@ -34,3 +34,8 @@
     b-) for read operation => 60 * 100 = 6 MB/s
   iiii-) Caching estimation
     a-) For caching we can use %20 rules. This means that in a day 10 GB / 5 = 2 GB caching can be used.
+    
+  4-) System API's
+    
+    i-) We can basically prefer REST API for this web site.
+    ii-) Basically three API first is uploadFile(key, url, text, private = none) return uniqueURL, second one is readFile(key, url) redirect original url, third one is deleteFile(key, url) return http response(SUCCESS or FAIL)
