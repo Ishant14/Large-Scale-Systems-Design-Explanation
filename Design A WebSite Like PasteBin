@@ -39,3 +39,15 @@
     
     i-) We can basically prefer REST API for this web site.
     ii-) Basically three API first is uploadFile(key, url, text, private = none) return uniqueURL, second one is readFile(key, url) redirect original url, third one is deleteFile(key, url) return http response(SUCCESS or FAIL)
+    
+  5-) Database
+    
+    i-) We can prefer NoSQL databases like Dynamo or Cassandra. Because there is huge data and no relationship between URLs, this is the good option.
+    ii-) We can quickly obtain the data with using NoSQL
+    iii-) Basically three table should be. First one is File, User, File and User.
+    
+  6-) Let's first think about basically system design
+    
+    i-) Storage can be divided into two parts.
+      a-) Metadata storage
+      b-) Block storage
