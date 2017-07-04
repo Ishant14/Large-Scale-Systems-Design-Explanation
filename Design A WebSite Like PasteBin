@@ -16,5 +16,21 @@
   iiiiiii-) System should return the response with minimum latency. This property is provided by using loadbalancing, partitioning, sharding, caching.
   iiiiiiii-) Additionally, system can be monitored.
   iiiiiiiii-) Rest or SOAP API's can prefer for connecting system and outer environment.
+  iiiiiiiiii-) We can limit users with determine uploading maximum size file. (such as 5 MB)
   
+3-) Capacity Estimation
 
+  => Let's assume that in one day 1 Million new file comes and ratio of read write operation is 5:1
+  i-) Traffic estimation
+    a-) In a second => write operation 1 M / (24*3600) = 12 files/s
+    b-) In a second => read operation approximately 60 files/s.
+  ii-) Capacity Estimation
+    a-) If we assume that average file is is 100 KB. So in one day => 100 KB * 1 M = 10 GB, in 5 years = 10 GB * 30 * 12 * 5 = 18000 GB = 18 TB in 5 years
+    b-) Additionally for unique URL we can use some key service that generate unique keys. Key generation services creates the unique strings and store the data
+    b-) For Key Generation Services capacity = 6 character * 8 byte * (base 64 endoding 64 ^ 6 = approximately 60 billion) = this is negligable
+    c-) And we can use the approximaion of usage total capacity. We use maximum %70 capacity at the same time. So we need to 25 TB storage.
+  iii-) Bandwith estimation
+    a-) for write operation => 12 * 100 = 1.2 MB/s
+    b-) for read operation => 60 * 100 = 6 MB/s
+  iiii-) Caching estimation
+    a-) For caching we can use %20 rules. This means that in a day 10 GB / 5 = 2 GB caching can be used.
