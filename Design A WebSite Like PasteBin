@@ -51,3 +51,5 @@
     i-) Storage can be divided into two parts.
       a-) Metadata storage
       b-) Block storage
+      c-) Client
+      d-) Application server
