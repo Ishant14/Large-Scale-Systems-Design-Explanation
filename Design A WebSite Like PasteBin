@@ -53,3 +53,32 @@
       b-) Block storage
       c-) Client
       d-) Application server
+
+  7-) Think about system design more deeply
+    
+    i-) Metadata storage
+    ii-) Block storage
+    iii-) Clients
+    iiii-) Load balancer (client and application servers, application servers and block servers,block caches,metadata servers, metadata caches)
+    iiiii-) Key generation service data storage
+    iiiiii-) Block cache
+    iiiiiii-) Metadata cache
+    iiiiiiii-) All of services have two or more replica servers.
+    
+  8-) Replication and Data partitioning
+  
+    i-) We can use sharding (horizontal partitioning for this sytem)
+    ii-) In addition, data replication can be used. (Each server has two or more copy server)
+    iii-) Hash based partition should be used to provide balancing.
+ 
+  9-) Caching
+ 
+    i-) Notice that we use %20 rules for caching.
+    ii-) In addition, block storage cache and metadata storage cache can be used.
+    iii-) LRU mechanism can prefer for caching
+    
+ 10-) Load balancer
+ 
+    i-) We can use Round Robind principle but this principle has important problem. This cannot handle if server is busy or fail, it continue to redirect busy or fail server.
+    ii-) We can create more intelligent load balancer principle for this problem.
+    
