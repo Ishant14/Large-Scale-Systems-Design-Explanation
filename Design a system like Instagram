@@ -45,9 +45,22 @@
     *  We can implement our system with split the request operations to other services (upload services and download services)
     *  Upload services can syncronious but download services can be asyncronious is good idea.
     * If we redirect the upload request and download request different servers then even if the system is busy, users can see the photos.
-    * We should save the copy of files to prevent data lost, (replication )
+    * We should save the copy of files to prevent data lost. (replication )
     * In replication system we replicate one server with two or more other servers.
     * Notice that copy of datas should not be saved in same server.
     * Additionally, for minimum latency we can divide image database to metadata database and image stroge (real information)
+    
+  6-) Sharding and Partition
+
+    * Sharding can be created by UserID or PhotoID. If we think that each shard is 5 TB then 300 shard has enough for this system.
+    * If we shard by UserID then we will find UserID % 300 to suitable shard.
+    * Notice that if the system is shard by userID then, this system can be unbalanced because some users share much more images then others.
+    * So we can prefer sharding by PhotoID. Notice that PhotoID can be created by Key generation services. 
+    * Key generation services create the keys first then these values saved in Key Database. (For minimum latency and eliminate duplication)
+  
+  7-) Caching
+  
+    * The caching operation can be used for metadata server. (CDN)
+    * Additionally we can use Least recently Used operation for caching mechanism.
  
 
