@@ -29,4 +29,25 @@
       
         1-) If we use %20 principle for caching mechanism. Then one day capacity * 0.2 is for cache memory => 400 GB * 0.2 = 80 GB
         
+  4-) API's and Database
+  
+    * We can use REST API's for this system. Basically UploadImage, DeleteImage, SearchImage, FollowUser, GetImages are necessity 
+    API's for this system.
+    
+    * For database, we can use NoSql because there will be millions of datas and latency is more important. We can prefer
+    MongoDB or Cassandra for creating this system. With NoSql there are basically four tables should be, First one is (Photos),
+    second one is (Users) and third one is (Images and Users) and final one is (User and Follows). 
+    
+  5-) High Level System Design
+  
+    *  Notice that most of servers have a connection limits at the same time. 
+    *  Upload files are much slower operation than download files (if files are in cache memory)
+    *  We can implement our system with split the request operations to other services (upload services and download services)
+    *  Upload services can syncronious but download services can be asyncronious is good idea.
+    * If we redirect the upload request and download request different servers then even if the system is busy, users can see the photos.
+    * We should save the copy of files to prevent data lost, (replication )
+    * In replication system we replicate one server with two or more other servers.
+    * Notice that copy of datas should not be saved in same server.
+    * Additionally, for minimum latency we can divide image database to metadata database and image stroge (real information)
  
+
