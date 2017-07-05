@@ -1,1 +1,19 @@
+1-) What this site looks like?
 
+  i-) This site is used for uploading image and sharing this image to any other users. 
+    This means that users can share images and other users who follow this user can see user's images.
+  ii-) Notice that users have a timeline that all of their images list here.
+
+2-) Requirements and goals
+
+  i-) Users can upload images and others can see these images.
+  ii-) Users can follow other users
+  iii-) Users can delete their images.
+  iiii-) Users have a timeline
+  iiiii-) Users can accept or ignore the other user's follow-up request
+  iiiiii-) System should be highly reliable. This means that any image should not be lost. (with replication)
+  iiiiiii-) System should be highly available. This means that every user should reach the images whenever they want (with one more servers)
+  iiiiiiii-) System should be work with minimum latency. (with partition, load balancer etc.)
+  iiiiiiiii-) Rest API can be used for this application.
+  iiiiiiiiii-) Notice that system can be monitored with some of added informations such as locations, access time, upload time etc.
+  
