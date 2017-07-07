@@ -77,5 +77,31 @@
   
   7-) Data partition
   
+  If we think that system will store much more huge data, we should distribute data with different servers. For this operation,
+  there are two possible options, first hash with USERID second is hash with MESSAGEID. If we partition with hash based on MESSAGEID
+  system may not be supported minimum latency. (fetching data from multiple server). So the efficient solution is Hash based on UserID.
+  With hash based on UserID we focus on shard. If we think that each shard 4 TB size, then shard number equals to 250. 
+  So server is (USERID % 250)
+  
+  8-) Cache
+  
+  Least recently used data for the user caches in one machine, because of same reasoning for data partition. (metadata caching and message db caching)
+  
+  9-) Load balancer
+  
+  * One for client and application servers
+  * One for application servers and cache servers
+  * One for application servers and message database servers
+  
+  10-) Replication
+  
+  * Replication should be applied for this system. Notice that for one server at least two or more copy of servers should be done.
+  
+  NOTE!! Fault tolerance and tolerance of consistency can be accepted. Additionally, if the always on server fails, then replication server
+  will be used like a always on server.
+  
+  
+  
+  
   
     
