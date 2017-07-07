@@ -1,8 +1,31 @@
 
 1-) What is system looks like?
 
-  * This software is an application that users can comminicate between other users. This means that users can send message or limited 
+  * This software is an application that users can comminicate between other users (whether they are friends or not). This means that users can send message or limited 
   files for other users. Notice that in a message sytem, one to one conservation or group conservation should be supported. As explained
-  later, system should be reliable and send response with minimum latency. (also availabity)
+  later, system should be reliable and send response with minimum latency. (also availabity). Additionally users should use this sytem in any
+  platform. (desktop or mobile or etc..)
   
 2-) Goals and Requirements
+
+ * There are 3 types of requirements should define for developing this system.
+ 
+   i-) Functional requirements
+     - User should send messages or limited files to other users.
+     - Users should see the all conservation tabs from their platform.
+     - Users should see the old conservations (in old messages area)
+     - Users should see who is online or who is offline in platform
+  
+   ii-) Non functional requirements
+    - System should be highly available. This means that users should reach the system 
+    whenever they want. We can prefer more servers for developing system. 
+    - System should return requests with minimum latency. This means that when users send a message to other user, this message should
+    reach as fast as possible. (This property can be provided with data partition and again with more servers)
+    - System can be reliable. This means that data loosing is not a good thing. We can do the replication. Notice that for one shard
+    the suitable replicate shard number is 2 or more. Additionally, system can be tolerance for consistency.
+    
+   iii-) Extended requirements
+    - REST API can be used to developing this system.
+    - Additionally we can use push notification services for seeing message when coming new message. Amazon SNS service
+    or OneSignal can be preferred for notifications. (OneSignal free, AWS SNS not free) 
+    - System can be monitorize.
