@@ -50,5 +50,32 @@
    * The server stores the message in its database and sends the message to B.
    * B gets the message and sends the acknowledgment to the server.
    * The server notifies A that the message has been delivered successfully to User-B.
+   
+ 5-) Database
+ 
+  * If we think that, there will be huge data over the 10 years, so we should care minimum latency, we don't use Relational database or
+  NoSql database like MongoGB. We can use HBase (Hadoop distributed file system big data) that provides us to read and write with minimum latency. 
+  * Notice that clients fetch the data with pagination because desktop and mobile is a different window size. Additionally,
+  when server get the request, it should store this data asencronious methods.
+  
+  6-) Detailed system component design
+  
+  * we should think that how clients receive or sent messages efficiently? There are two types of here. First one is pull type and second 
+  one is push type. Pull type means that clients ask server new messages comes or not periodically. This leads to wasting a lot of source.
+  Additionally, in this method, clients have to check server for minimum latency. This means that this is an inefficient solution.
+  In push method; Users can keep a connection open with the server and can depend upon the server to notify them whenever there are new messages.
+  (Http Long polling). Notice that if servers have a lot of opening connections, they decide which message belongs to which connection with
+  Hashing. (userID and connection object)
+  Additionally  Let’s plan for 100 million connections at any time. 
+  Assuming a modern server can handle 10K concurrent connections at the same time, we would need 10K such servers. Additionally,
+  we will use software load balancer for determining user server relations. Finally;
+  
+  i-) Clients oepn connections
+  ii-) Client send data to chat server
+  iii-) All of the related other clients receive this messages with long polling
+  iiii-) At the same time server store data in database (with seperate one thread or asyncronious method)
+  
+  7-) Data partition
+  
   
     
