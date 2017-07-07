@@ -45,5 +45,9 @@
     
   4-) Think about high level design
   
-   *
+   A sends a message to B through the server.
+   The server receives the message and sends an acknowledgment to A.
+   The server stores the message in its database and sends the message to B.
+   B gets the message and sends the acknowledgment to the server.
+   The server notifies A that the message has been delivered successfully to User-B.
     
