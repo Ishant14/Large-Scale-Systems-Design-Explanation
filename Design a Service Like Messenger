@@ -1,0 +1,8 @@
+
+1-) What is system looks like?
+
+  * This software is an application that users can comminicate between other users. This means that users can send message or limited 
+  files for other users. Notice that in a message sytem, one to one conservation or group conservation should be supported. As explained
+  later, system should be reliable and send response with minimum latency. (also availabity)
+  
+2-) Goals and Requirements
