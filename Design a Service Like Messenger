@@ -29,3 +29,21 @@
     - Additionally we can use push notification services for seeing message when coming new message. Amazon SNS service
     or OneSignal can be preferred for notifications. (OneSignal free, AWS SNS not free) 
     - System can be monitorize.
+    
+  3-) Capacity estimation
+  
+    * In this systen, we suppose that 100 Million active users in one day, and each users end average 30 new messages in a day. This means 
+    that (If we think that each message is 100 bytes)
+    
+    Storage estimate in one day : 100M * 30 new message *  100 bytes = 3 * 10^11 Byte = 300 GB 
+    Storage estimate in 10 years : 300 GB * 365 * 10 = (approximately) 1 PB (huge data).
+    Notice that this estimation is only for chat data. This does not include metadata(user information, chat data information) 
+    and replications.
+    
+    * For bandwith estimation; 
+    300 GB / (24 * 3600) = (approximately 5 MB) => (For both upload and download)
+    
+  4-) Think about high level design
+  
+   *
+    
