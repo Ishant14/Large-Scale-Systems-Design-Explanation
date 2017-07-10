@@ -1,1 +1,27 @@
+1-) What this system looks like?
+  
+  * This system provides us to share text with other users. This is typically social networking system. When users use this system, 
+  they post character sets(maximum 150 character) and they are called as "tweets". Notice that in Twitter system, if you register this
+  site, you can post and read tweets, on the other hand, if you are not register (or not login) you can only read tweets. Moreover, users
+  reach this system any platform like desktop application or mobile application.
 
+2-) Requirements and goals of Twitter
+
+  * There are typically 3 types of requirements. First one is functional requirements, second one is nonfunctional requirements and 
+  third one is extended requirements. During the development process, we should determine all three requirements clearly.
+  * Users can register and login.
+  * Users can logout.
+  * When users login, they can share or read tweets.
+  * When users are not register or login, they can only read tweets.
+  * Users can follow other users.
+  * Users can mark some tweets as a favourite.
+  * System should be highly reliable. This means that no of post should be lost.
+  * System should be highly available. This means that users should reach this system whenever they want.
+  * System should return the requests with minimum latency. This means that users should reach the posts nearly real lime.
+  * System can be monitorized. For this purpose, we can keep the location of users, or location of shared tweets.
+  * During the development of system, REST or SOAP API's can be used. (REST API is a little bit good option)
+  * Additionally, when users post tweets, these tweets can contain any file or photo.
+  * Notice that, if we design a system like twitter, we can determine the acceptable latency like as a 300 ms.
+  * Additionally, consistency can acceptable, if the system give the request properly later.
+  * Users can search the tweets during the travel the site.
+  * Finally, people can answer the tweets.
