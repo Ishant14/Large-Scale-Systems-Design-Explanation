@@ -25,3 +25,42 @@
   * Additionally, consistency can acceptable, if the system give the request properly later.
   * Users can search the tweets during the travel the site.
   * Finally, people can answer the tweets.
+  
+ 3-) Capacity and Estimation
+ 
+  * If we assume that daily, 100 Million new tweets come to this system, and notice that maximum tweet size is 150 character, 
+  
+  * Daily storage = 100 Million * (140 * 2 + 20) = 100 Million * 300 bytes = 30 GB per day. (20 Byte for medata of tweet)
+  If we think about 10 years later, 30 GB * 30 * 12 * 10 = 30 GB * 3600 = 108 TB for text tweet. Additionaly if we assume that,
+  If any photo = 100 KB and any video is 2 MB and ratio is (5:1:1);
+  
+  100 KB * 20 Million * 30 * 12 * 10 = 200 Million * 3600 KB = 2 GB * 360 = 720 TB for photos
+  2 MB * 20 Million * 30 * 12 * 10 = 400 Million * 360 MB = approximately 4*10^12 byte * 36 = 144 * 10^12 byte for videos.
+  
+  * This is a huge data. We need to sharding.
+  
+  Additionaly we can calculate bandwith estimate. Notice that for banding, we should calculate the read and write tweet capacity in a second.
+  Moreover, cahcing mechanism should be used to develop this sytem. If we think that the general approximation of caching mechanism is 
+  %20 for daily storage, we can easily calculate the necessity memory for caching.
+  
+ 4-) API's
+ 
+ * To develop this site, we can use REST API's for mobile application and desktop application. (Notice that we can also use SOAP API's)
+ * There are several main API's.
+  - createTweet
+  - deleteTweet
+  - updateTweet
+  - getTweet
+  - searchTweet
+  - markTweet
+  - followUser
+  - login
+  - logout
+  ...etc
+  
+  * Notice that, key parameter should be used almost every API's because of controlling registration and monitoring system. (We can obtain
+  information about users with key). A succesfull create API will return URL demonstrated by string and failed API return HTTP_Response error.
+  
+  
+  
+  
