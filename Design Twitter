@@ -101,6 +101,39 @@
   İf we use hashing with creation time, we can quicly obtain the new or hot tweets. On the other hand, obtaining latest tweets causes 
   higher latencies. Briefly, we can use hash based on tweetID and tweetCreationTime for taking advantage of both of them.
   
+  8-) Caching
+  
+  * We can use LRU (least recently used) prenciples for caching mechanism. Additionally, we can use hottest tweets or users for caching. 
+  We can use MemCache for this operation. As you know, caching operation provide us to obtain data quickly. Notice that we should determine
+  the number of necessity caching servers. As we explained before, we can try to use %20 principles. 
+  
+  9-) Detailed explanation of high level system design
+  
+  * Clients applications are routed to application servers by the load balancer.
+  * Application servers quicly look the caching servers by the load balancer whether data is here or not.
+  * If data is not here, then application server looks to DB Shard. (We should determine the Sharding number)
+  * When data is found to DB Shard, LRU caching mechanism will be used and cahce server will be updated.
+  * Notice that fileStorage or metadata servers connect the application servers at the same time.
+  
+  10-) Data replication
+  
+  * To provide high reliable, we can keep data more than one servers. The best idea for replication is every always on server, two or more
+  copy servers should be used. Additionally, we can use this idea that, always on servers can be used for writing data and copy servers
+  can be used for only reading operations. This helps system to reduce traffic loads. Moreover, if alwayson servers (primary) fail, one of
+  the secondary(copy) servers behaves like a always on server.
+  
+  11-) Monitoring
+  
+  * To measure the durability of the system, monitoring operation is more crucial.By monitoring operation we can quickly notice the 
+  more needed replication, sharing, caching or load balancing.
+  * We can keep new tweets in a day
+  * we can measure latency.
+  * we can keep location of the tweets.
+  * how many tweets serving at the same time? 
+  etc....
+  
+  
+  
   
   
   
