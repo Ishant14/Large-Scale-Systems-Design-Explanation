@@ -1,1 +1,30 @@
 
+1-) INTRODUCING
+
+- Firstly we should cover some of the important issues. Firstly, we should clarify the system design very well. Additionally we can determine
+the type of databases (NoSql or RDBMS) and limitiations of limit be carefully
+
+- Like youtube, this system provides users to share or watch video on cloud platform. Additionally, user can make comment or get the point
+to video or fallow the other users when using this cloud web application.
+
+2-) REQUIREMENTS AND GOALS OF THE SYSTEM
+
+- There are three types of requirements. These are functional, nonfunctional and extended requirements.
+
+- Functional requirements
+  
+  i-) User can login and logout
+  ii-) User can upload videos and share videos
+  iii-) User can watch videos 
+  iv-) User can give the rate of videos.
+  v-) User can like or dislike the photos.
+  vi-) Users can see the watching number of video.
+  vii-) User can add or view comments.
+  
+ - Nonfunctional requirements
+ 
+  i-) System should be highly reliable, this means that uploading videos cannot be losted. This necessity can be provided by using the repli
+  ii-) System should be highly avaliable. This means that user should reach the system whenever you want. Also system should have a 
+  minimum latency. Notice that we can choose the CAP Theorem when designing the system, so this system will be acceptable if some of videos 
+  does not be seen for a while. (Notice that this is partition tolerance, system should always work.)
+  
