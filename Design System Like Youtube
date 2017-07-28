@@ -36,5 +36,40 @@ to video or fallow the other users when using this cloud web application.
   If anyone use the azure platform, Azure looks the CPU usage and if maximum usage rate is reached, Azure automatically add new nodes. (Example 
   of Azure)
   
+ 3-) CAPACİTY AND ESTIMATION
+ 
+ General Estimates
+ ----------
+ - If this web application has 100 million active users per day and the average number of watching video per user is 5.
+ - One second viewing video = 100M * 5 / 3600 = (approximately) 6K videos / second
+ 
+ Now lets assume that the ratio of uploading and downloading videos is 1 : 100. So,
+ - One second uploading video = 6K / 100 = 60 videos /second
+ 
+ Storage Estimates
+ -------------
+ - Now, let's assume that totally, 100 hours video is uploading per day. This means that, additionally, 1 minute video has 100 MB so,
+ 
+ 100 * 60 * 100 MB = 60000 MB This means that 60 GB per day to need to keep the data of video. Notice that, this number does not deal with
+ the replication of data or metadatas or information of users. Now, if we try to estimate the total capacity of system after the 5 years,
+ then this is too much to store data. (with replication and metadatas.)
+ 
+ 4-) SYSTEM API's
+ 
+ We can use REST API's to provide connections. (backend vs mobile and frontend). Additionally, we have mainly two APIs. First one is
+ searchVideo and second one is uploadVideo. Notice that all of these API's has API_KEY to provide security (registered account for users).
+ 
+ uploadVideo(apiKey, title, description, language, details, contents)
+ searchVideo(apiKey, searchTitle, location, maximumVideoCount)
+ 
+ Notice that location is an optional and it is used for increasing the performing.
+ Also notice that JSON format is used to returning datas.
+ 
+ 5-) HIGH LEVEL DESIGN BASICALLY
+ 
+ 
+ 
+ 
+ 
   
   
