@@ -81,6 +81,9 @@ to video or fallow the other users when using this cloud web application.
   duty of web server is related to http request. After the web server, request comes to application server. Application server 
   connects with the user database, metadabase, encoder and video database. Notice that metadata database keep the detail information of 
   video such as users that upload viode, or video time, or video language etc..
+  
+  Additionally encoder's main duty is the chancing the video type to multiple formats to provide watching the video properly. This operation 
+  actualizes with the queue operations. 
  
  
  
