@@ -112,11 +112,42 @@ to video or fallow the other users when using this cloud web application.
   can have caching mecahinism and if they find the video then it can return the video. Otherwise, Request comes to web server. Web server 
   handles the http requests and transfer the request to application server. Application server has connections with user management, metadata
   database and encode. Additionally applicaton server has a connection with video storage. Notice that we add new level that is video caching.
-  Moreover we add CDN.
+  Moreover we add CDN. Onemore, we can seperate read and write request servers to increase the performance.
   
   8-) SHARDING
   
+  Because of the huge data that need to be stored, we need to distribute datas onto multiple servers to increase the performance.
+  We can shard based on userID and shard based on videoID. If we shard datas based on the userID. maybe the uniformly distributed cannot be 
+  occured. Because what if some user has more popular than others. In this state, some of servers have much more datas than others. Additionally,
+  at this stage, much more request can come to these servers and this stuations affects performance badly. Additionally, if we prefer the 
+  sharding based on videoID then, we need to centrilazed server to rank the (specific)users video because we obtain the datas maybe all of servers.
   
+  9-) VIDEO DEDUPLICATION
+  
+  If some users update same videos, what do we should do. Maybe we can work with video matching algorithm and if this algorithm find the 
+  same video, then can compare these videos based on quality. If the qualtiy of new video is higher than the older then, older video will be
+  deleted and new video will uploaded. Otherwise operation will be stopped.
+  
+  10-) LOAD BALANCING
+  
+  we should use load balancer to provide data redundancy. We can use load balancer for web servers, application servers, metadata servers and 
+  thumbnail servers. We can prefer round robin algorithm to load balancing but this is not good idea since round robin algorithm
+  cannot be eliminate the request when server is busy or not suitable, so we can prefer intelligent round roibn algorithm to stop the
+  sending request a server that is busy or not working.
+  
+  11-) CACHING
+  
+  We can prefer %20 %80 rule to apply caching. This means that if we have 100 GB datas then we use caching with 20 GB storage. Notice that
+  we can prefer LRU (Least recently used) algorithm for caching. Addıtıonally, we should put the death time of the caching data becaseu of providing
+  consistency. Caching mechanism can be used for metadata and video storage database. Additionally, our main approach to using caching is
+  increasing the performance. We use mamcache or .NET cache systems to implement caching. But mamcache is distributed. .NET cache system is not
+  distributed. If you have one more cluster of servers then I think you should choose memcache otherwise you should choose .NET cache, because of 
+  performance.
+  
+  12-)  CONTENT DELIVERY NETWORK (CDN)
+  
+  CDN is basically used for media storages and files. CDN is distributed and main approaxh of CDN is increasing the performance while
+  reaching the data. Notice that CDN makes use of the caching operation too much.
   
  
  
