@@ -67,7 +67,20 @@ to video or fallow the other users when using this cloud web application.
  
  5-) HIGH LEVEL DESIGN BASICALLY
  
- 
+  - Users
+  - Web Server
+  - Application Server
+  - Encoder
+  - User Database server
+  - Vdeo Database server
+  - Metadata server
+  
+  If we imagine the flow of user request;
+  
+  When user search, upload or view data, request firstly comes to web server. Web server is just to handle http request. The main
+  duty of web server is related to http request. After the web server, request comes to application server. Application server 
+  connects with the user database, metadabase, encoder and video database. Notice that metadata database keep the detail information of 
+  video such as users that upload viode, or video time, or video language etc..
  
  
  
