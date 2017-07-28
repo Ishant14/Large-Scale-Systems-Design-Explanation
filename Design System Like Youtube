@@ -23,8 +23,18 @@ to video or fallow the other users when using this cloud web application.
   
  - Nonfunctional requirements
  
-  i-) System should be highly reliable, this means that uploading videos cannot be losted. This necessity can be provided by using the repli
+  i-) System should be highly reliable, this means that uploading videos cannot be losted. This necessity can be provided by using the replication
   ii-) System should be highly avaliable. This means that user should reach the system whenever you want. Also system should have a 
   minimum latency. Notice that we can choose the CAP Theorem when designing the system, so this system will be acceptable if some of videos 
   does not be seen for a while. (Notice that this is partition tolerance, system should always work.)
+  iii-) System should work with minimum latency. (This functionality is provided with data partition and sharding)
+  
+  - Extended requirements
+  
+  i-) We can design related web application with REST APIs. Additionally, we can keep the watching video time or watching location to monitorize 
+  the system. Additionaly, we can use monitoring to keep track of system usage. Notice that Azure provides us to this functionalities.
+  If anyone use the azure platform, Azure looks the CPU usage and if maximum usage rate is reached, Azure automatically add new nodes. (Example 
+  of Azure)
+  
+  
   
