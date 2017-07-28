@@ -85,6 +85,43 @@ to video or fallow the other users when using this cloud web application.
   Additionally encoder's main duty is the chancing the video type to multiple formats to provide watching the video properly. This operation 
   actualizes with the queue operations. 
  
+ 6-) DATABASE SCHEMA
+ 
+ Notice that we hava three database servers. First one is related to user second one is related to video content and thir one is related
+ to video metadata. We can save the datas with MySql. User data has userId,Name,Surname,Mail,RegistrationDate and Video has VİdeoID, Title,
+ Description, Size, Thumbnail, Number of likes, Uploader(User), Number of Dislikes and number of Views. Additionally we should be careful
+ to design database. 3NF form should be used in database schema. Becucase of that, we can keep comment of video in the seperate data. 
+ Additioanlly we can keep the users that view,like, dislike the videos in separate tables. Onemore information about the database is
+ Mysql is the RDBMS and this basically supports the ACID Thorem. Also videos can be stored in a distributed file storage system.
+ 
+ 7-) DETAILED HIGH LEVEL DESIGN
+ 
+  - Client
+  - Proxy Server
+  - Web Server
+  - Application Server
+  - User Database Server
+  - MetaData database server
+  - Encode
+  - ThumbNail Storage
+  - Video Storage
+  - Video Cache
+  - CDN (Content Delivery Network)
+  
+  If we imagine the flow of user request, client can upload, search or view. These request firstly come to proxy server. Proxy server
+  can have caching mecahinism and if they find the video then it can return the video. Otherwise, Request comes to web server. Web server 
+  handles the http requests and transfer the request to application server. Application server has connections with user management, metadata
+  database and encode. Additionally applicaton server has a connection with video storage. Notice that we add new level that is video caching.
+  Moreover we add CDN.
+  
+  8-) SHARDING
+  
+  
+  
+ 
+ 
+ 
+ 
  
  
   
