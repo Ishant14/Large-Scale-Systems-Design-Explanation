@@ -1,0 +1,61 @@
+1-) What is Typehead Suggestion?
+  - Typehead suggestions helps us to search for known and frequently searched terms. Users can search any terms in the box and system should 
+  gives the list of suggestions. It is basically complete the query. This system is basically based on the being query better. 
+
+2-) Requirements and Goals of the System
+  a-) Functional Requirements
+    - Users can search the query in the box and system should be improve the query being much more related. 
+    - System should suggest between 0 and 10 terms at down the box. This means that system should suggest the top 10 terms.
+    - Users can use this system without registration. This means that every user can used the system with doing anything.
+    
+  b-) Non functional Requirements
+    - System should be highly available. This means that, if we think that system should be usable at every time, system should be work nonstop.
+    - System should have the real time. This means that system should be real time systems. Another possible restriction is that system should
+    suggest within 100 ms.
+    
+  c-) Extended Requirements
+    - System should be keep the top queries because of giving the top queries.
+    - Notice that if user go to any web site with suggestion query, this query classified as an important query (to present this query to other
+    users)
+ 
+ 3-) Basic Design and Algorithm
+  - Notice that this system has more complex problems. To illustrate this, if our database save some terms like a "mountaion", "money", 
+  "monkey" and "movement" and user write the word such as "mo" then system should suggest al of this words ("mountain", "money", "monkey", 
+  "movement"). Because of the gicing lots of queries with minimum latency, we have to efficiently store the data that can be queried quickly.
+  - For this operation we need to store our index in memory in a hihgly efficient data structure.
+  - To handle this problem, the best option is using "Trie". Trie basically provides us to word letter by letter.(like as a tree)
+  - For processing the query start with "Mo" system should traverse all the words start with "Mo". Notice that if any trie node has exactly
+  one child node. Then we can combine these nodes. 
+  - Notice that if we do this system with case insensitive, then we can store the data all capital letters. So there is no any problem related
+  to case sensitive.
+  - Another complex situation is finding the top queries. The first soluiton is keeping the searched count of all words (in the last letter of every words.)
+  But this gives much more problem. Imagine that system is so huge and to find the top words, we have to traverse all the words. This  
+  causes to system performance decreasing. We should improve our solution to find best efficiency. We can store the top words in each node 
+  that starts with this node. This provides to increasing performance and speed up. But more improvements, we can store the referencial 
+  point and just traverse these points for suggestions to handle the using mouch more memories.
+  - We built the tree with the bottom up principle because of the keeping top words. (we recursively call the all child nodes to calculate 
+  top words count.)
+ - Another problem is updating trie. For example system has to give 100K queries in a second. This means that we should not update trie
+ after every query processing. We can have a Map-Reduce process, and every periodical times (are determined by us). Trie is updated with
+ Map Reduce. Notice that we should do that when system offline because system should'nt block the trie. If we have a master-slave configuration
+ and having one more tries, then system works perfectly. This provides to better performance and being availabity and having minimum latency.
+ - If we don't suggest any word because of legacy or piracy, we can add a filter to each server and we do not show these words.
+ - One more think is that, we should take care of the user location, language and personal history to suggest any words to providing good
+ matching.
+  - Another think is that we can take snapshot of our trie periodically (is determined by us). So we can easily rebuild the trie when server
+  goes down. We can store the trie starting with the root and continuning to saving level by level.
+ 
+ 4-) Scale Estimation
+  - Imagine that, if system takes the 1 billion searches every day, which that gives us to approximately 10 K queries per second. 
+  - We can eliminate duplicate words and they just affect us to finding top terms. But we can assume that only 1:5 of these will be unique.
+  Let's assume that we will have 10 million unique terms for which we want to build index.
+  
+ 5-) Capacity
+ - if every query has avarage of the 3 words and lengths are avarage 5 characters. This means that query length is 15 characters (avarage)
+ So each query size is avarege 30 bytes. 
+ => Daily = 10 M * 30 Byte = 300 MB
+ => One year => 300 MB + (365 * 3GB * 0.02) = (approximately 20 GM) (For coming new queries we assume %2)
+ 
+6-) Data Partition
+ 
+ 
