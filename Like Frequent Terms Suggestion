@@ -7,6 +7,12 @@
     - Users can search the query in the box and system should be improve the query being much more related. 
     - System should suggest between 0 and 10 terms at down the box. This means that system should suggest the top 10 terms.
     - Users can use this system without registration. This means that every user can used the system with doing anything.
+    - System will start to suggest queries if user has not pressed any key within 50 ms.
+    - User can cancel the suggetions.
+    - Before starting writing, system should wait for getting first latter.
+    - System should save the recent history based on the user. Notice that, these records can be used for suggestions any other users.
+    - Connection should establish as soon as possible. (The best thing is that when user open the web server, system is ready to use)
+    - Server can push some part of their cache to CDNs for providing efficiency.
     
   b-) Non functional Requirements
     - System should be highly available. This means that, if we think that system should be usable at every time, system should be work nonstop.
@@ -57,5 +63,47 @@
  => One year => 300 MB + (365 * 3GB * 0.02) = (approximately 20 GM) (For coming new queries we assume %2)
  
 6-) Data Partition
+
+- Even if our index is fit to keep one server, we can do data partition to get higher efficiency and lower latencies. 
+- There are three option for doing partitioning. First one is range based partition, second one is partition based on the maximum 
+capacity of server and third one is partition based on the hash of the term. The first one is not efficient because when we save the datas based on the first letter, some words can be much more 
+than the other if we compare words related to starting letter. For example if we save all the terms that starting with the 'A' in one server
+and save all terms starting with the 'B' another server, some servers can save much more data then others. Another problem is that maybe,
+words starting with 'A' cannot be fit in one server. So second option more useful than first one. We store data on a server as long as it 
+has memory available. 
+
+Server 1, A-AAD
+Server 2, AADA, CDA
+Server 3, CDB - EKZ
+---
+
+- If user write 'A' in the box, both one and second sever have to use, but if user write AB only server 2 has to use. Notice that 
+we can use load balancer for determining the suitable server. Additionally, if we use one more server to suggest, we need to merge results 
+at the server side or client side. If we prefer to do this on the server side, we have to have another layer between load balancers and
+trie servers. It provides system to return top suggestions. If there are lots of queries for terms starting with 'mo', server keeping it 
+will have a high load compared to others. So third option is best for partitioning. Each term is passed to a hash function and then 
+is stored to server via this hash function. (we have to use consistent hashing for fault tolerance and load distribution)
+
+7-) Cache
+
+- We can cache the top results and if we do that, we get much more good performance. We can have seperate cache servers in front of the 
+trie servers. Firstly application server should chech before going to trie servers and if application server finds, it return these queries
+without going trie servers. But we should built caching mechanism to hold top queries. That's because top queries can change. We can
+add control time for providing consistent caching.
+
+8-) Replication and Load Balancer
+
+- We should have replicas for our trie servers both for load balancing and fault tolerance. 
+- Notice that if one server goes down, thanks to master-slave configuration, slave can take over and it becomes a master, server that
+went down can rebuilt the related trie servers based on the last snapshot.
+
+9-) Getting Better Result
+  
+  - For getting better result, users will encounter with the some suggestions based on the location, previous searches, languages and etc.
+  We can store personal history on different server (trie servers) and cache them. 
+
+
+
+
  
  
