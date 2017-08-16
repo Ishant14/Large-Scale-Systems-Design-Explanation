@@ -1,2 +1,3 @@
 # Large-Scale-System-Design-
-Design descriptions of large scale systems for interview
+
+Explanations of how large systems are designed and scaled. 
