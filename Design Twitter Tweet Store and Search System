@@ -1,0 +1,76 @@
+1-) How this sytem looks like?
+
+Twitter is one of the biggest system that users can share and update status. Additionally, most of the users can easily update their status
+via Tweets. Moreover users can easily search Tweets whatever thery want. Notice that this system is so huge and because of that system
+should design very carefully.
+
+2-) Reqirements
+
+There are three types of requirements and these are functional, non functional and extended requirements
+  
+  a-) Functional Requirements
+  
+  - Users can search the tweets whether they are registered or not. (Public or private accounts are important)
+  - When users search the keys, these keys can consist of one or two words. Because of that system should bring all of the possible 
+  suggestion occuring "AND" and "OR".
+  - Users can delete their tweets when these tweets deleted, system should not suggest these tweets.
+  
+  b-) Nonfunctional Requirements
+  
+  - System should be highly available. This means that any user must be able to reach the system whenever they want. This is provided by
+  using the replicaton process. System should have at least three replicas for each servers including application servers. Additionally, 
+  replication helps system to decrease the response time and traffic-heavy( we can use load balancer that rotated requests.)
+  
+  - System should answer the request with minimum latency. This means that system should be real time systems. This is provided via the
+  sharding. Sharding means that datas are kept different database servers. Notice that this system exists if system save the datas using 
+  the MongoDB. These parts will be explained below.
+  
+  - System should store the datas efficiently. Because of that, we can select the NoSQL rather than the RDBMS. Notice that NoSQL can have
+  horizontal partition easily(sharding.). however if RDMBS is selected to use, horizontal partition is so hard. (vertical sharding can use.)
+  One more thing that, if system should be so reliable and tables have more relations then you use RDMBS such as MySql, postgresql or Mssql
+  because RDMS support the Transactional operations (ACID). On the other hand, NoSQL works in RAM to provide increasing time speed and NoSQL
+  work with CAP (BASE) thorem. 
+  
+  c-) Extended Requirements
+  
+  - System should be monitorized. This means that, if server count is not enough and any server fails then system shoul be alerted. Notice
+  that we can use ManageEngine "Opmanager" to monitorizing. You can monitor the CPU Utilization, disk utilization 
+  and memory utilization via "opManager."
+  
+  3-) Capacity and Estimations
+  
+  - Firstly, we should determine to number of users. lets assume that, Twitter has approximately 2 billion users and 500 million daily
+  active users. Also assume that, Twitter gets 500 million tweets in each day. We can easily call that every tweets is approximately 
+  300 bytes. Additionally, we should determine the number of searches in every day and let's say that search number is 500 million.
+  With above informations, 500 million each tweets * 300 bytes = 15 * 10^10 = 150 GB each day. Because of that if we calculate the 
+  system capacity after the 10 years, this amount is so huge, because of that we should prefer to NoSQL. 
+  - Additioanlly, if we decide to use caching system. Caching mechanism rule is 80-20. So 150 GB each day / 5 = 30 GB for caching. Notice 
+  that moderns servers can store more than 30 GB. We can easily store the cache datas in one server.
+  
+  4-) System API's
+  
+  We can use the SOAP or REST APIs to service the datas in our system. But if we think about the modern technologies and mobile applications,
+  usage of REST API's is better than the SOAP. Because of that, we can select the REST API's. Notice that we have one API which is basically
+  called the search.
+  
+  Search(api_keys, search_terms, suggested_results_count, sort).
+  
+  Notice that, api_dev_keys is used for registered account. This will be used for determining the quotas. Additionally, search_terms
+  includes the "AND" and "OR" results.
+  
+  The "search API's" return the suggested results via JSON formats. These results are returned with UserID, userName, text, creation time,
+  number of likes, number of dislikes etc..
+  
+  5-) Beginning High Level System Design
+  
+  - Clients redirect to application server to update or search status.
+  - Application server redirect datas to storage server to save or application server goes to storage server and index server to find query results.
+  - Also application server also goes to index server to creating index.
+  
+  6-) Detailed Component Design
+  
+  
+  
+  
+  
+  
