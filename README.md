@@ -15,7 +15,7 @@ In designing procedure;
 
 are explained in detail.
 
-------- SYSTEM THAT ARE EXPLAINED -----------
+------- SYSTEMS THAT ARE EXPLAINED -----------
 
 - Design A Web System Like PasteBin
 - Design System Like Youtube
