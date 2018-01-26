@@ -63,11 +63,12 @@ We can use REST or SOAP to server our APIs. Basically, there are three important
 		UploadPicture base on the uploading picture. api_dev_key is the API developer key of a registered account. 
 We can eliminate hacker attacks with api_dev_key. This API returns HTTP response. (202 accepted if success)
 	2-) DownloadPicture (api_dev_key, search_query, user_location, maximum_video_count, page_token)
-	Return JSON containing information about the list of pictures. Each picture resource will have a picture title, creation date, 
+		Return JSON containing information about the list of pictures. Each picture resource will have a picture title, creation date, 
 like count, dislike count, total view count.
 	3-)DeletePicture (api_dev_key, pictureID)
-	Return HTTP response if success.
-	There are a lot of another APIs to design Instagram, however, these three APIs are more important than the others.
+		Return HTTP response if success.
+	
+There are a lot of another APIs to design Instagram, however, these three APIs are more important than the others.
 
 5- DATABASE SCHEMA
 
